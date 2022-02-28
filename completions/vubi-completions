@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+_help_completions() {
+    echo "new create a new sdl project"
+}
+_vubi_cli_completions(){
+    case "${COMP_WORDS[1]}" in
+        help|d)
+            _help_completions
+            ;;
+
+        *)
+            if [ "${#COMP_WORDS[@]}" != "2" ]; then
+                return
+            fi
+            COMPREPLY=($(compgen -W "new build run help"  "${COMP_WORDS[1]}"))
+            ;;
+    esac
+
+}
+
+complete -F _vubi_cli_completions vubi

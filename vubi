@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+_inside_project () {
+    if [ ! -d "vubi" ]; then
+        echo "Must be inside vubi project to run this command"
+        exit 1
+    fi
+}
+_new () {
+    if [ ! -d "$1" ]; then
+        echo "Creating vubi sdl project"
+        git clone https://github.com/vushu/vubi-sdl.git $1
+        rm -rf "$1/.git"
+    else
+        echo "Folder with name " $2 " already exists!"
+    fi
+}
+
+
+_build () {
+    _inside_project
+    build_folder="build"
+    if [ ! -d "$build_folder" ]; then
+        mkdir $build_folder
+        cd $build_folder
+        cmake ..
+        make
+        cd -
+        if [ ! -f "compile_commands.json" ]; then
+            ln -s $build_folder/compile_commands.json
+        fi
+    else
+        rm -rf $build_folder
+        _build
+    fi
+}
+
+_run () {
+    _inside_project
+    build_folder="build"
+    if [ ! -d "$build_folder" ]; then
+        _build
+    else
+        cd "$build_folder/bin"
+        ./game
+    fi
+}
+
+_main_screen(){
+    cli_name=${0##*/}
+    echo "
+    $cli_name
+    Version: 1.0
+    Usage: $cli_name [command]
+    Commands:
+    new       Create a new vubi-sdl project
+    run       Run project, must be inside project folder
+    build     Build project, must be inside project folder
+    "
+    exit 1
+}
+
+case "$1" in
+    new|d)
+        _new $2
+        ;;
+    build|d)
+        _build
+        ;;
+    run|d)
+        _run
+        ;;
+    *)
+        _main_screen
+        ;;
+esac
+
+
