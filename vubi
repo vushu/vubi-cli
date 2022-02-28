@@ -17,6 +17,20 @@ _new () {
 }
 
 
+_update () {
+    _inside_project
+    read -p "Are you sure? this will overwrite current version of vubi " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        git clone https://github.com/vushu/vubi-sdl.git latest
+        cd latest && mv vubi ../vubi
+        cd -
+        rm -rf latest
+    fi
+}
+
+
 _build () {
     _inside_project
     build_folder="build"
@@ -71,6 +85,10 @@ case "$1" in
     run|d)
         _run
         ;;
+    update|d)
+        _update
+        ;;
+
     *)
         _main_screen
         ;;

@@ -13,7 +13,7 @@ _vubi_cli_completions(){
             if [ "${#COMP_WORDS[@]}" != "2" ]; then
                 return
             fi
-            COMPREPLY=($(compgen -W "new build run help"  "${COMP_WORDS[1]}"))
+            COMPREPLY=($(compgen -W "new update build run help"  "${COMP_WORDS[1]}"))
             ;;
     esac
 
