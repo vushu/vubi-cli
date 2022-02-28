@@ -23,8 +23,8 @@ _update () {
     echo    # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        git clone https://github.com/vushu/vubi-sdl.git latest
-        cd latest && mv vubi ../vubi
+        git clone https://github.com/vushu/vubi-sdl.git latest_vubi
+        cd latest_vubi && mv vubi ../
         cd -
         rm -rf latest
     fi
