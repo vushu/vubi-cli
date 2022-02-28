@@ -24,8 +24,8 @@ _update () {
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
         git clone https://github.com/vushu/vubi-sdl.git latest_vubi
-        cd latest_vubi && mv vubi ../
-        cd -
+        rm -rf vubi
+        mv latest_vubi/vubi ./vubi
         rm -rf latest_vubi
     fi
 }
