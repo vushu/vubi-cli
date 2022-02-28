@@ -26,7 +26,7 @@ _update () {
         git clone https://github.com/vushu/vubi-sdl.git latest_vubi
         cd latest_vubi && mv vubi ../
         cd -
-        rm -rf latest
+        rm -rf latest_vubi
     fi
 }
 
