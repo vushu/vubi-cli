@@ -53,7 +53,6 @@ _run () {
     _inside_project
     build_folder="build"
     _build
-    _run
     cd "$build_folder/bin"
     ./game
 }
