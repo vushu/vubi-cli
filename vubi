@@ -52,13 +52,10 @@ _build () {
 _run () {
     _inside_project
     build_folder="build"
-    if [ ! -d "$build_folder" ]; then
-        _build
-        _run
-    else
-        cd "$build_folder/bin"
-        ./game
-    fi
+    _build
+    _run
+    cd "$build_folder/bin"
+    ./game
 }
 
 _main_screen(){
